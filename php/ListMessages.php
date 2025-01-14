@@ -1,7 +1,7 @@
 <?php
 
 
-require '../database/Connection.php';
+require '../src/database/Connection.php';
 $conn = Connection::connection();
 
 // lista de menssagens enviadas ao usuário
@@ -20,4 +20,9 @@ class ListMessages
         return $stmt_chats->fetchAll(PDO::FETCH_ASSOC);
     }
 }
+
+$u = new ListMessages();
+echo "<pre>";
+var_dump($u->getChat($conn));
+echo "</pre>";
 

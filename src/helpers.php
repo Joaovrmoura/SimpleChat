@@ -9,13 +9,9 @@ header('Access-Control-Allow-Headers: Content-Type');
 header('Content-type: application/json');
 
 require_once 'database/Connection.php';
-require_once 'models/User.php';
-require_once 'models/listUsers.php';
-require_once 'models/Messages.php';
-
 $conn = Connection::connection();
-$user = new User();
-$listUser = new ListUsers();
+
+
 
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {

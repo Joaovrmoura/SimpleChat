@@ -1,0 +1,6 @@
+logica de adicionar menssagens
+diminuir o tamnho do código 
+apagar oque não estiver sendo usado
+melhorar a lógica da aplicação
+caso o usuário pesquise ou veja o próprio cadastro colocar uma lógica de iteração com si próprio
+criar mais camadas de segurança nos inputs

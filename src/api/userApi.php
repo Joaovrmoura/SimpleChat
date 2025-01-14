@@ -1,6 +1,12 @@
 <?php
 
 require_once '../helpers.php';
+require_once '../models/User.php';
+require_once '../models/listUsers.php';
+
+$user = new User();
+$listUser = new ListUsers();
+
 
 switch ($data->action) {
     case 'register':
@@ -10,7 +16,7 @@ switch ($data->action) {
             sendJsonResponse(true,'Registrado', );
         }
         break;
-
+        
     case 'login':
         if(!$user->login($conn, $data)){
             sendJsonResponse(false, 'algo deu errado',$data);

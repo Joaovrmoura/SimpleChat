@@ -1,34 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php include 'header.php'; ?>
+  <!-- Página de Chat -->
+    <span><a href="index.php"><i class="fas fa-arrow-left" id="back"></i></a></span>
+    <div class="chat-page"id="chatPage">
+      <div class="chat-container">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/index.css">
-    <title>Document</title>
-</head>
+        <div class="chat-display">
 
-<body>
+          <!-- mensagens entre users -->
+          <!-- <div class="message received">Olá! Como vai?</div>
+          <div class="message sent">Oi! Tudo bem, e você?</div> -->
+          <!-- mensagens entre users -->
 
-    <div class="chat-window">
-        <div class="chat-header">
-            <span><i class="fas fa-arrow-left" id="back"></i></span>
-            <h3>Chat</h3>
         </div>
 
-        <div class="navigation">
-            <button class="nav-button active" id="chat">Amigos</button>
-            <button class="nav-button chat" id="friends">Chat</button>
-        </div>
-        <div class="chat-footer">
-            <form class="myform" action="">
-                <input type="text" placeholder="Digite sua mensagem..." name="message" class="chat-input">
-                <button class="send-button">Enviar</button>
-            </form>
-        </div>
+      </div>
+
+        <form class="chat-input" action="">
+          <input type="hidden" name="receiver_id" value="<?= $receiver_id ?>">
+          <input type="hidden" name="myId" value="<?= $_SESSION['id'] ?>">
+          <input type="text" name="message" placeholder="Digite sua mensagem...">
+          <button class="sendChat" type="submit">Enviar</button>
+        </form>
+      </div>
     </div>
-
-</body>
-
-</html>
+  </div>
+<script src="js/chat.js"></script>
+  <?php include 'footer.php'; ?>
