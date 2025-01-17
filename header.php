@@ -2,17 +2,18 @@
 
 session_start();
 
-if(isset($_GET['my_id'])){
-  $_SESSION['id'] = $_GET['my_id'];
+
+if(!isset($_SESSION['user_id'])){
+  header('location: login.php');
 }
+
 
 if(isset($_GET['user_id'])){
-  $receiver_id = $_GET['user_id'];
+    $receiver_id = $_GET['user_id'];
 }
 
-// require './src/helpers.php';
-
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -24,15 +25,5 @@ if(isset($_GET['user_id'])){
   <title>Chat App</title>
 
 </head>
-
 <body>
-
-<!-- <div class="ids" style="display:none">
-  <p class="my_id"><?= $_SESSION['id'] ?? 'não existe' ?> </p>
-  <p class="receiver_id"> <?= $receiver_id  ?? 'não existe'?></p>
-</div> -->
-
   <div class="container">
-
-<input type="hidden" id="myId" value="<?= $_SESSION['id'] ?? '' ?>">
-<input type="hidden" id="receiverId" value="<?= $receiver_id ?? '' ?>">

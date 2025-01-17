@@ -1,18 +1,30 @@
-<?php 
+<?php
 
-require '../database/Connection.php';
+// Headers para permitir CORS
+header('Access-Control-Allow-Origin: *');
+
+session_start();
+
+require '../src/database/Connection.php';
 $conn = Connection::connection();
-header('Content-type: application/json');
 
 // retorna todos os usuários
-class ShowUsers{
-    public function showUsers($conn){
-        $stmt_user = $conn->query("SELECT * FROM users");
-        $stmt_user->execute();
-        return $stmt_user->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $conn->query("SELECT id_user, name, status FROM users");
+    $stmt->execute();
+    $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if (count($row) > 0) {
+        foreach ($row as $rows){
+            echo '
+            <a href="chat.php?receiver_id='.$rows['id_user'].'" class="friend-item">
+                <div class="avatar"></div>
+                <div class="item-info">
+                    <div class="item-name"> ' . $rows['name'] . ' </div>
+                    <div class="item-preview"> '. $rows['status'] .'</div>
+                </div> 
+            </a>';
+        }
+        
+    }else{
+        echo "sem retorno";
     }
-}
 
-$users = new ShowUsers();
-$data_user = $users->showUsers($conn);
-echo json_encode($data_user);

@@ -96,7 +96,7 @@ body {
 
 .chat-display {
   flex: 1;
-  margin-top: 45px;
+  margin-top: 30px;
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 20px;
@@ -111,23 +111,22 @@ body {
   height: 100%;
 }
 .message {
-  margin: 20px 0px;
+  margin: 15px 0px;
   padding: 10px;
   border-radius: 15px;
   max-width: 70%;
 }
 
 .sent {
-  background-color: var(--tech-stack-box-first-color);
-  color: white;
+  background-color: var(--tech-stack-box-white);
+  color: black;
   margin-left: auto;
 }
 
 .received {
-  background-color: var(--tech-stack-box-white);
-  color: black;
+  background-color: var(--tech-stack-box-first-color);
+  color: white;
 }
-
 
 .chat-input {
   display: flex;
@@ -178,10 +177,24 @@ body {
 }
 
 .list-title {
+  display: flex;
+  justify-content: space-between;
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 15px;
   color: var(--tech-stack-box-white);
+}
+.exitBtn{
+  list-style: none;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 8px;
+  font-size: 12px;
+  background-color: rgba(245, 34, 34, 0.534);
+  color: var(--tech-stack-box-grey);
+  border: solid 1px var(--tech-stack-box-grey);
+  border-radius: 3px;
+  border: none;
 }
 
 .friend-item, .message-item {

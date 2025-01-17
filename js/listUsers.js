@@ -4,6 +4,7 @@ const navButton = document.querySelectorAll('.nav-button')
 let formdata = {
     action: 'list'
 }
+
 function listUsers(){
     setInterval(async () => {
         const response = await fetch('http://localhost/chatSimples/src/api/userApi.php', {
@@ -18,7 +19,6 @@ function listUsers(){
             renderHtml(data.data) 
         })    
     }, 1500)
-
 }
 
 listUsers()
@@ -27,7 +27,7 @@ function renderHtml(data) {
     friends.innerHTML = ''
     data.forEach(element => {
         const a = document.createElement('a');
-        a.href = `chat.php?user_id=${element.id_user}`;
+        a.href = `chat.php?receiver_id=${element.id_user}`;
         a.classList.add('friend-item');
         a.innerHTML = `
             <div class="avatar"></div>

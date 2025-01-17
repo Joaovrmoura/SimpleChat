@@ -1,11 +1,29 @@
 <?php 
 
+session_start();
+
 class Messages{
     public function showMyMessges($conn, $data){
         // Lógica para obter mensagens
-        $query_chats = "SELECT u.id_user, m.message, m.receiver_id, m.created_at, u.name AS sender_name FROM 
-        messages m JOIN users u ON m.sender_id = u.id_user WHERE 
-        m.receiver_id = :my_id OR m.sender_id = :my_id ORDER BY m.created_at ASC";
+        $query_chats = 
+        "SELECT 
+            u.id_user, 
+            m.message, 
+            m.receiver_id, 
+            m.created_at, 
+            u.name AS sender_name, 
+            r.name AS receiver_name
+        FROM 
+            messages m
+        JOIN 
+            users u ON m.sender_id = u.id_user
+        JOIN 
+            users r ON m.receiver_id = r.id_user
+        WHERE 
+            m.receiver_id = :my_id OR m.sender_id = :my_id
+        ORDER BY 
+            m.created_at ASC";
+    
     
         $stmt_chats = $conn->prepare($query_chats);
         $stmt_chats->execute([':my_id' => $data->my_id]);

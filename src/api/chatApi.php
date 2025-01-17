@@ -1,10 +1,11 @@
 <?php
 
-require_once '../helpers.php';
+include '../helpers.php';
 require_once '../models/Messages.php';
 $myMessages = new Messages();
 $chatMessages = new Messages();
 $insertMessage = new Messages();
+
 
 switch($data->action){
     case 'user-message':

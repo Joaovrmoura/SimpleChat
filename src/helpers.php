@@ -12,8 +12,6 @@ require_once 'database/Connection.php';
 $conn = Connection::connection();
 
 
-
-
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $arr_data = file_get_contents('php://input');
     $data = json_decode($arr_data);
@@ -34,6 +32,7 @@ function sendJsonResponse($success, $message,  $data = null, $user_id=null){
         'success' => $success,
         'message' => $message,
         'data' => $data,
+        'user_id' => $user_id
     ]);
     exit;
 }
