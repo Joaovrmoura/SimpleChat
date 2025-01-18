@@ -1,7 +1,4 @@
 <?php 
-
-session_start();
-
 class Messages{
     public function showMyMessges($conn, $data){
         // Lógica para obter mensagens
@@ -51,7 +48,7 @@ class Messages{
     
     // atualiza o chat com as menssagens recebidas e enviadas
     public function ChatMessages($conn, $data){
-        $query_message = "SELECT m.id_message, m.sender_id, m.receiver_id, u_sender.name AS sender_name, 
+        $query_message = "SELECT m.id_message, m.sender_id, m.receiver_id, m.created_at, u_sender.name AS sender_name, 
         u_receiver.name AS receiver_name, m.message, m.created_at FROM  messages m JOIN users u_sender 
         ON m.sender_id = u_sender.id_user JOIN users u_receiver ON m.receiver_id = u_receiver.id_user 
         WHERE (m.sender_id = :my_id AND m.receiver_id = :other_user_id) OR (m.sender_id = :other_user_id 
@@ -76,9 +73,3 @@ class Messages{
         return true;
     }
 }
-
-// require '../database/Connection.php';
-// $conn = Connection::connection();
-
-// $m = new Messages();
-// var_dump($m->InsertChat($conn, 10, 11, 'como vai joasao???'));

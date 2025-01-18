@@ -1,23 +1,20 @@
-<?php
+<?php include 'header.php'; 
 
- include 'header.php'; 
+session_start();
+
+if(!isset($_SESSION['user_id'])){
+  header('location: login.php');
+}
 
 ?>
-
   <!-- Página de Chat -->
-    <span><a href="index.php">
+    <span><a href="users.php">
       <i class="fas fa-arrow-left" id="back"></i>
     </a></span>
     <div class="chat-page"id="chatPage">
       <div class="chat-container">
 
         <div class="chat-display">
-
-          <!-- mensagens entre users -->
-          <!-- <div class="message received">Olá! Como vai?</div>
-          <div class="message sent">Oi! Tudo bem, e você?</div> -->
-          <!-- mensagens entre users -->
-
         </div>
 
       </div>
@@ -32,6 +29,4 @@
     </div>
   </div>
 
-
-<script src="js/chat.js"></script>
-  <?php include 'footer.php'; ?>
+<script src="./src/js/chat.js"></script>

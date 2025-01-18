@@ -26,35 +26,27 @@ form.onsubmit = (e) => {
         return;
     }
 
-    // let formData = {
-    //     action: 'register',
-    //     name: form.name.value.trim(),
-    //     email: form.email.value.trim(),
-    //     password: form.password.value.trim(),
-    //     confirmPassword: form.confirmPassword.value.trim()
-    // };
+   let formData = {
+    action : 'register',
+    name : form.name.value,
+    email : form.email.value,
+    password : form.password.value,
+    confirmPassword : form.confirmPassword.value
+   }
 
-    let formData = new FormData(form)
-
-    fetch('http://localhost/chatSimples/php/register.php', 
-        { method: 'POST', body: formData})
+    fetch('http://localhost:3000/xampp/htdocs/chatSimples/src/api/controllerApi.php', 
+        { method: 'POST', body: JSON.stringify(formData)})
         .then(response => {
             if (response.ok){
-                response.text();
-                location.href = './index.php';
+                return response.json()
+            }
+        }).then(data => {
+            if(data.success){
+                console.log(data);
+                location.href = './users.php';
+            }else{
+                console.log(data);
+                message(data);
             }
         })
-        // .then(obj => {
-        //     let data = JSON.parse(obj)     
-        //     if(data.success){
-        //         location.href = './index.php';
-        //     }else{
-        //         console.log(data);
-        //         message(data);
-        //     }
-        // })
-        // .catch(error => {
-        //     message({ success: false, message: 'Erro ao processar os dados.' });
-        //     console.error(error);
-        // });
 };

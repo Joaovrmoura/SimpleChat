@@ -1,5 +1,6 @@
 <?php
 
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -8,8 +9,11 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-type: application/json');
 
-require_once 'database/Connection.php';
+require_once '../database/Connection.php';
 $conn = Connection::connection();
+
+require_once 'User.php';
+require_once 'Messages.php';
 
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {

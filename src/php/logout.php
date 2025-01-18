@@ -1,8 +1,9 @@
 <?php 
-// Remove todas as variáveis da sessão
+
+define('ROOT_URL', 'http://localhost:3000/xampp/htdocs/chatSimples/login.php');
+
 session_unset(); 
 
-// Destroi o cookie de sessão no navegador
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
     setcookie(session_name(), '', time() - 42000,
@@ -11,7 +12,6 @@ if (ini_get("session.use_cookies")) {
     );
 }
 
-// Destrói a sessão
 session_destroy();
-header('location:login.php');
+header('location:'.ROOT_URL);
 exit;

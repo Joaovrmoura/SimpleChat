@@ -9,7 +9,7 @@ if (isNaN(user_id)) {
 function listUserMessage() {
   setInterval(async () => {
     try {
-      const response = await fetch('http://localhost/chatSimples/src/api/chatApi.php', {
+      const response = await fetch('http://localhost:3000/xampp/htdocs/chatSimples/src/api/controllerApi.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -25,11 +25,15 @@ function listUserMessage() {
       }
 
       const data = await response.json();
-
+       
       if (data.success === true) {
         const messages = data.data;
-        console.log("Mensagens recebidas:", messages);
 
+        window.onload = function() {
+          window.scrollTo(0, document.body.scrollHeight);
+        };
+        // console.log("Mensagens recebidas:", messages);
+        
         renderListMessages(getLastMessagesInOrder(messages, user_id));
       } else {
         renderListMessages(false);
@@ -37,7 +41,7 @@ function listUserMessage() {
     } catch (error) {
       console.error("Erro ao buscar mensagens:", error);
     }
-  }, 1000);
+  }, 500);
 }
 
 
@@ -72,7 +76,7 @@ function getLastMessagesInOrder(data, user_id) {
 
 
 function renderListMessages(data) {
-  console.log("ID da sessão do usuário:", user_id);
+  // console.log("ID da sessão do usuário:", user_id);
 
 
   listChat.innerHTML = '';

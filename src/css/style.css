@@ -133,6 +133,10 @@ body {
   margin: 15px;
 }
 
+.created_at{
+  justify-self: end;
+  font-size: 10px;
+}
 .chat-input input {
   width: 250px;
   flex: 1;

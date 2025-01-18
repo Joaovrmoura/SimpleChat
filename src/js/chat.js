@@ -1,11 +1,22 @@
 const chatMessage = document.querySelector('.chat-display');
 const form = document.querySelector('.chat-input');
 const sendbtn = document.querySelector('.sendChat');
+const chatPage = document.querySelector('.chat-container')
+
+
+chatPage.onmouseenter = () => {
+    chatPage.classList.add("scroll"); 
+}
+
+chatPage.onmouseleave = () => {
+    chatPage.classList.remove("scroll"); 
+}
+
 
 function insertMessages() {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-
+      
         const userId = form.querySelector('[name="user_id"]');
         const receiverId = form.querySelector('[name="receiver_id"]');
         const message = form.querySelector('[name="message"]');
@@ -15,7 +26,7 @@ function insertMessages() {
             return;
         }
 
-        fetch('http://localhost/chatSimples/src/api/chatApi.php', {
+        fetch('./src/api/controllerApi.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,6 +47,7 @@ function insertMessages() {
             })
             .then((data) => {
                 console.log("Mensagem enviada com sucesso:", data);
+                scrollToBottom(); 
             })
             .catch((error) => console.error("Erro:", error));
 
@@ -56,7 +68,7 @@ function getMessagesChat() {
         }
 
         try {
-            const response = await fetch('http://localhost/chatSimples/src/api/chatApi.php', {
+            const response = await fetch('http://localhost:3000/xampp/htdocs/chatSimples/src/api/controllerApi.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -76,17 +88,23 @@ function getMessagesChat() {
 
             if (data.success) {
                 renderChat(data.data);
+                if(!chatPage.classList.contains("scroll")){
+                    scrollToBottom();
+                }
             } else {
                 renderChat(false);
             }
         } catch (error) {
             console.error("Erro ao buscar mensagens:", error);
         }
-    }, 2000);
+    }, 500);
+
 }
+
 getMessagesChat();
 
 function renderChat(data) {
+    let count = 0;
     chatMessage.innerHTML = '';
     if (!data) {
         chatMessage.innerHTML = `
@@ -95,16 +113,25 @@ function renderChat(data) {
     } else {
         data.forEach((element) => {
             const div = document.createElement('div');
-
+            const p = document.createElement('p')
+            p.classList.add('created_at')
             if (element.sender_id == form.querySelector('[name="user_id"]').value) {
                 div.classList.add('message', 'sent');
                 div.textContent = element.message;
+                p.innerHTML = element.created_at
+                div.appendChild(p)
             } else {
                 div.classList.add('message', 'received');
                 div.textContent = element.message;
+                p.innerHTML = element.created_at
+                div.appendChild(p)
             }
-
             chatMessage.appendChild(div);
         });
     }
+
+}
+
+function scrollToBottom(){
+    chatPage.scrollTop = chatPage.scrollHeight; 
 }

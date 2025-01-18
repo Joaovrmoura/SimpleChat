@@ -7,7 +7,7 @@ let formdata = {
 
 function listUsers(){
     setInterval(async () => {
-        const response = await fetch('http://localhost/chatSimples/src/api/userApi.php', {
+        const response = await fetch('http://localhost:3000/xampp/htdocs/chatSimples/src/api/controllerApi.php', {
             method: 'POST', body: JSON.stringify(formdata)
         })
         .then(response => { 
@@ -18,7 +18,7 @@ function listUsers(){
         .then(data => { 
             renderHtml(data.data) 
         })    
-    }, 1500)
+    }, 500)
 }
 
 listUsers()
